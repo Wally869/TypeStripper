@@ -55,6 +55,7 @@ def test_list_single_simple_type_function_header_output():
         temp = re.sub(pattern, "", temp)
     assert(temp == targetSentence)
 
+'''
 def test_list_double_simple_type_function_header_output():
     # testing for annotation of multiple variables with single types in function header:
     inputSentence = "def __call__(self, rootNote, inversion = 0, fromRoot = True) -> List[Error, int]:"
@@ -83,5 +84,5 @@ def test_list_single_complex_double_type_function_header_output():
     for pattern in PATTERNS:
         temp = re.sub(pattern, "", temp)
     assert(temp == targetSentence)
-
+'''
 
