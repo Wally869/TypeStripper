@@ -1,4 +1,4 @@
-# TypeStripper
+# TypeStripper [![Build Status](https://travis-ci.com/Wally869/TypeStripper.svg?branch=master)](https://travis-ci.com/Wally869/TypeStripper)
 
 Utility to delete all type hinting from a Python script.
 
