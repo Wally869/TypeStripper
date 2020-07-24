@@ -10,7 +10,7 @@ import argparse
 from pathlib import Path
 
 
-def Main(inputFolder: str, outputFolder: str):
+def Main(inputFolder: str, outputFolder: str) -> None:
     # create outputfolder
     Path(outputFolder).mkdir(parents=True, exist_ok=True)
     
