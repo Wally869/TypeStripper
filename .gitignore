@@ -2,5 +2,6 @@ __pycache__/
 .pytest_cache/
 testpackage/
 output/
+.idea/
 Expressions2.py
 ExpressionsGenerator.py
