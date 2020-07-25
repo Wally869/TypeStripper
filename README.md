@@ -54,3 +54,15 @@ See Below for details (type names are provided as illustrations).
     r":\s[a-zA-Z]+",                                # matches ': int'
 ```
 
+
+## Known Errors
+
+Lambda functions
+Dictionnaries
+Dataclasses type annotations
+
+
+## Improvements
+
+- Fix errors by checking for parentheses and comas?
+- Add preprocessing directives #NoStrip
