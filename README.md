@@ -84,11 +84,8 @@ This case is handled with the following rules:
 
 ## Known Errors
 
-Lambda functions   
-Dictionnaries   
-Dataclasses type annotations   
 Composite type names (e.g. np.array)
-
+Underscores
 
 ## Improvements
 
