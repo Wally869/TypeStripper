@@ -2,10 +2,8 @@
 
 Utility to delete all type hinting from a Python script.
 
-NOTE: This is a WIP and is functional only in very restrictive settings 
-because of the 'r":\s[a-zA-Z]+' rule (no dictionnaries, no dataclasses, no lambda functions).
-Composite type names such as np.array are also not supported.
-Check the section "Known Issues" for the current state of breaking features.
+NOTE: This is a WIP, but should be able to handle most cases. Let me know if you encounter an issue.
+Currently, type hints with underscores or wich include a point (such as my_class or np.array) are NOT supported
 
 ## Why?
 
@@ -84,9 +82,5 @@ This case is handled with the following rules:
 
 ## Known Errors
 
-Composite type names (e.g. np.array)
+Composite type names (e.g. np.array)  
 Underscores
-
-## Improvements
-
-- Fix errors by checking for parentheses and comas?
