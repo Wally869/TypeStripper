@@ -13,7 +13,7 @@ from pathlib import Path
 def Main(inputFolder: str, outputFolder: str) -> None:
     # create outputfolder
     Path(outputFolder).mkdir(parents=True, exist_ok=True)
-    
+
     foldersToExplore = []
     explorationDepth = 1
     while True:
@@ -34,9 +34,12 @@ def Main(inputFolder: str, outputFolder: str) -> None:
             with open(currFile, "r") as f:
                 currData = f.read()
 
-            currData = re.sub(r"from __future__ import annotations\n", "", currData)
-            for pattern in PATTERNS:
-                currData = re.sub(pattern, "", currData)
+            # look for preprocessing directive: #NoTypeStripping
+            preprocessMatch = re.search("#NoTypeStripping", currData)
+            if (preprocessMatch is None):
+                currData = re.sub(r"from __future__ import annotations\n", "", currData)
+                for pattern in PATTERNS:
+                    currData = re.sub(pattern, "", currData)
 
             with open("{}/{}".format(outputFolder, currFile), "w+") as f:
                 f.write(currData)

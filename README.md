@@ -2,6 +2,10 @@
 
 Utility to delete all type hinting from a Python script.
 
+NOTE: This is a WIP and is functional only in very restrictive settings 
+because of the 'r":\s[a-zA-Z]+' rule (no dictionnaries, no dataclasses, no lambda functions).
+Composite type names such as np.array are also not supported.
+Check the section "Known Issues" for the current state of breaking features.
 
 ## Why?
 
@@ -34,6 +38,20 @@ Call the script from the CLI:
 ![Help Argparse](ReadmeImages/argparse.JPG)
 
 
+You can add a preprocessing directive to your files to signal that TypeStripper should not operate on them
+and should just copy them with no modifications.  
+Simply add: #NoTypeStripping anywhere in you file
+
+```python
+import argparse
+
+#NoTypeStripping
+
+def Foo():
+    return "Bar"
+
+```
+
 ## Currently Supported Patterns
 
 Simple patterns are supported, which should cover most cases.
@@ -45,7 +63,7 @@ Currently unsupported:
 See Below for details (type names are provided as illustrations).
 
 
-```python
+```pythonregexp
     r":\s[a-zA-Z]+\[[a-zA-Z]+,\s[a-zA-Z]+\]",       # matches ': Union[int, Note]'
     r":\s[a-zA-Z]+\[[a-zA-Z]+",                     # matches ': List[float]'
     r"\s->\s[a-zA-Z]+\[[a-zA-Z]+,\s[a-zA-Z]+\]",    # matches ' -> Union[int, Note]'
@@ -57,12 +75,12 @@ See Below for details (type names are provided as illustrations).
 
 ## Known Errors
 
-Lambda functions
+Lambda functions  
 Dictionnaries
 Dataclasses type annotations
+Composite type names (e.g. np.array)
 
 
 ## Improvements
 
 - Fix errors by checking for parentheses and comas?
-- Add preprocessing directives #NoStrip
