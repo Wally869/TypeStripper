@@ -4,6 +4,7 @@ import re
 
 
 ####### IN HEADER DECLARATION INPUT #######
+'''
 def test_single_simple_type_function_header_declaration():
     # testing for annotation of a single variable:
     inputSentence = "def InvertIntervals(self, inversion: int = 0):"
@@ -23,7 +24,7 @@ def test_multiple_simple_type_function_header_declaration():
     for pattern in PATTERNS:
         temp = re.sub(pattern, "", temp)
     assert(temp == targetSentence)
-
+'''
 
 def test_list_single_simple_type_function_header_declaration():
     # testing for annotation of multiple variables with single types in function header:
