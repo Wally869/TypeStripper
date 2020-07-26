@@ -3,8 +3,8 @@
 Utility to delete all type hinting from a Python script.
 
 NOTE: This is a WIP, but should be able to handle most cases. Let me know if you encounter an issue.
-Currently, type hints with underscores or wich include a point (such as my_class or np.array) are NOT supported. 
-Current recommended workaround is to use aliases for type hinting annotations, or annotate the file as not to be stripped.
+Currently, type hints with underscores or wich include a point (such as my_class or np.array) are NOT supported.   
+Current recommended workaround is to use aliases for unsupported type hinting annotations, or put the preprocessing tag to mark the file as not to be stripped.
 
 ## Why?
 
