@@ -38,11 +38,14 @@ def Main(inputFolder: str, outputFolder: str) -> None:
             preprocessMatch = re.search("#NoTypeStripping", currData)
             if (preprocessMatch is None):
                 currData = re.sub(r"from __future__ import annotations\n", "", currData)
+                currData = re.sub(r"from typing.*", "", currData)
+                currData = re.sub(r"import typing", "", currData)
                 for pattern in PATTERNS:
                     currData = re.sub(pattern, "", currData)
 
                 currData = re.sub(r"(?<!\"):\s[a-zA-Z]+,", ",", currData)
                 currData = re.sub(r":\s[a-zA-Z]+\)", ")", currData)
+                currData = re.sub(r":\s[a-zA-Z]+\s\=(?!\=)", " =", currData)
                 #for pattern in [r":\s[a-zA-Z]+"]
 
             with open("{}/{}".format(outputFolder, currFile), "w+") as f:

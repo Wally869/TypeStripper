@@ -3,7 +3,8 @@
 Utility to delete all type hinting from a Python script.
 
 NOTE: This is a WIP, but should be able to handle most cases. Let me know if you encounter an issue.
-Currently, type hints with underscores or wich include a point (such as my_class or np.array) are NOT supported
+Currently, type hints with underscores or wich include a point (such as my_class or np.array) are NOT supported. 
+Current recommended workaround is to use aliases for type hinting annotations, or annotate the file as not to be stripped.
 
 ## Why?
 
@@ -38,7 +39,7 @@ Call the script from the CLI:
 
 You can add a preprocessing directive to your files to signal that TypeStripper should not operate on them
 and should just copy them with no modifications.  
-Simply add: #NoTypeStripping anywhere in you file
+Simply add: #NoTypeStripping anywhere in your file
 
 ```python
 import argparse
@@ -54,7 +55,7 @@ def Foo():
 
 Simple patterns are supported, which should cover most cases.
 Currently unsupported:
-- No support for type names containing underscores  
+- No support for type names containing underscores or points
 
 See Below for details (type names are provided as illustrations).
 
@@ -67,7 +68,6 @@ See Below for details (type names are provided as illustrations).
     r"\s->\s[a-zA-Z]+\[[a-zA-Z]+,\s[a-zA-Z]+\]",    # matches ' -> Union[int, Note]'
     r"\s->\s[a-zA-Z]+\[[a-zA-Z]+",                  # matches ' -> List[float]'
     r"\s->\s[a-zA-Z]+",                             # matches ' -> Note'
-    r":\s[a-zA-Z]+",                                # matches ': int'
 ```
 
 While previous types are simply subtracted from the parsed string, 
@@ -77,10 +77,11 @@ This case is handled with the following rules:
 ```python
     re.sub(r"(?<!\"):\s[a-zA-Z]+,", ",", currData)
     re.sub(r":\s[a-zA-Z]+\)", ")", currData)
+    re.sub(r":\s[a-zA-Z]+\s\=(?!\=)", " =", currData)
 ```
 
 
-## Known Errors
+## Known Issues
 
 Composite type names (e.g. np.array)  
 Underscores
