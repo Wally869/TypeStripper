@@ -56,17 +56,15 @@ def Foo():
 
 Simple patterns are supported, which should cover most cases.
 Currently unsupported:
-- Lists, Unions etc are only detected for up to 2 components.  
 - No support for type names containing underscores  
 
-
 See Below for details (type names are provided as illustrations).
-
 
 ```pythonregexp
     r":\s[a-zA-Z]+\[[a-zA-Z]+\[[a-zA-Z]+,\s[a-zA-Z]+\[[a-zA-Z]+,\s[a-zA-Z]+\]\]\]", # matches: ': List[Dict[str, Union[float, int]]]'
     r"\s->\s[a-zA-Z]+\[[a-zA-Z]+\[[a-zA-Z]+\],\s[a-zA-Z]+\[[a-zA-Z]+\]\]", # matches: ' -> Tuple[List[Note], List[Error]]'
     r":\s[a-zA-Z]+\[[a-zA-Z]+,\s[a-zA-Z]+\]",       # matches ': Union[int, Note]'
+    r":\s[a-zA-Z]+\[[a-zA-Z]+\[[a-zA-Z]+\],\s[a-zA-Z]+\]", # matches ': Union[List[Note], Note]'
     r":\s[a-zA-Z]+\[[a-zA-Z]+",                     # matches ': List[float]'
     r"\s->\s[a-zA-Z]+\[[a-zA-Z]+,\s[a-zA-Z]+\]",    # matches ' -> Union[int, Note]'
     r"\s->\s[a-zA-Z]+\[[a-zA-Z]+",                  # matches ' -> List[float]'
@@ -74,12 +72,21 @@ See Below for details (type names are provided as illustrations).
     r":\s[a-zA-Z]+",                                # matches ': int'
 ```
 
+While previous types are simply subtracted from the parsed string, 
+matching a simple type after colons, such as ': int' is trickier.
+
+This case is handled with the following rules:
+```python
+    re.sub(r"(?<!\"):\s[a-zA-Z]+,", ",", currData)
+    re.sub(r":\s[a-zA-Z]+\)", ")", currData)
+```
+
 
 ## Known Errors
 
-Lambda functions  
-Dictionnaries
-Dataclasses type annotations
+Lambda functions   
+Dictionnaries   
+Dataclasses type annotations   
 Composite type names (e.g. np.array)
 
 

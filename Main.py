@@ -41,6 +41,10 @@ def Main(inputFolder: str, outputFolder: str) -> None:
                 for pattern in PATTERNS:
                     currData = re.sub(pattern, "", currData)
 
+                currData = re.sub(r"(?<!\"):\s[a-zA-Z]+,", ",", currData)
+                currData = re.sub(r":\s[a-zA-Z]+\)", ")", currData)
+                #for pattern in [r":\s[a-zA-Z]+"]
+
             with open("{}/{}".format(outputFolder, currFile), "w+") as f:
                 f.write(currData)
 
