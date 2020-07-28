@@ -37,20 +37,15 @@ def Main(inputFolder: str, outputFolder: str) -> None:
             # look for preprocessing directive: #NoTypeStripping
             preprocessMatch = re.search("#NoTypeStripping", currData)
             if (preprocessMatch is None):
-                currData = re.sub(r"from __future__ import annotations\n", "", currData)
-                currData = re.sub(r"from typing.*", "", currData)
-                currData = re.sub(r"import typing", "", currData)
                 for pattern in PATTERNS:
-                    currData = re.sub(pattern, "", currData)
-
-                currData = re.sub(r"(?<!\"):\s[a-zA-Z]+,", ",", currData)
-                currData = re.sub(r":\s[a-zA-Z]+\)", ")", currData)
-                currData = re.sub(r":\s[a-zA-Z]+\s\=(?!\=)", " =", currData)
-                #for pattern in [r":\s[a-zA-Z]+"]
+                    currData = MatchPattern(currData, pattern)
 
             with open("{}/{}".format(outputFolder, currFile), "w+") as f:
                 f.write(currData)
 
+
+def MatchPattern(inputString: str, pattern: str) -> str:
+    return re.sub(pattern[0], pattern[1], inputString)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Strip type hinting from a python project.')
