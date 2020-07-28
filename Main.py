@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List, Union
+from typing import List, Union, Tuple
 
 from Expressions import PATTERNS
 
@@ -44,7 +44,7 @@ def Main(inputFolder: str, outputFolder: str) -> None:
                 f.write(currData)
 
 
-def MatchPattern(inputString: str, pattern: str) -> str:
+def MatchPattern(inputString: str, pattern: Tuple[str]) -> str:
     return re.sub(pattern[0], pattern[1], inputString)
 
 if __name__ == "__main__":

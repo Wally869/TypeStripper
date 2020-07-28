@@ -1,4 +1,5 @@
 from Expressions import PATTERNS
+from Main import MatchPattern
 
 import re
 
@@ -32,7 +33,7 @@ def test_list_single_simple_type_function_header_declaration():
     targetSentence = "def __call__(self, rootNote, inversion = 0, fromRoot = True):"
     temp = inputSentence
     for pattern in PATTERNS:
-        temp = re.sub(pattern, "", temp)
+        temp = MatchPattern(temp, pattern)
     assert(temp == targetSentence)
 
 
@@ -42,7 +43,7 @@ def test_list_multiple_simple_type_function_header_declaration():
     targetSentence = "def __call__(self, rootNote, inversion = 0, fromRoot = True):"
     temp = inputSentence
     for pattern in PATTERNS:
-        temp = re.sub(pattern, "", temp)
+        temp = MatchPattern(temp, pattern)
     assert(temp == targetSentence)
 
 
@@ -53,7 +54,7 @@ def test_list_single_simple_type_function_header_output():
     targetSentence = "def __call__(self, rootNote, inversion = 0, fromRoot = True):"
     temp = inputSentence
     for pattern in PATTERNS:
-        temp = re.sub(pattern, "", temp)
+        temp = MatchPattern(temp, pattern)
     assert(temp == targetSentence)
 
 
@@ -63,7 +64,7 @@ def test_list_double_simple_type_function_header_output():
     targetSentence = "def __call__(self, rootNote, inversion = 0, fromRoot = True):"
     temp = inputSentence
     for pattern in PATTERNS:
-        temp = re.sub(pattern, "", temp)
+        temp = MatchPattern(temp, pattern)
     assert(temp == targetSentence)
 
 """
@@ -73,7 +74,7 @@ def test_list_single_complex_simple_type_function_header_output():
     targetSentence = "def __call__(self, rootNote, inversion = 0, fromRoot = True):"
     temp = inputSentence
     for pattern in PATTERNS:
-        temp = re.sub(pattern, "", temp)
+        temp = MatchPattern(temp, pattern)
     assert(temp == targetSentence)
 
 
@@ -83,7 +84,8 @@ def test_list_single_complex_double_type_function_header_output():
     targetSentence = "def __call__(self, rootNote, inversion = 0, fromRoot = True):"
     temp = inputSentence
     for pattern in PATTERNS:
-        temp = re.sub(pattern, "", temp)
+        temp = MatchPattern(temp, pattern)
     assert(temp == targetSentence)
 """
+
 
